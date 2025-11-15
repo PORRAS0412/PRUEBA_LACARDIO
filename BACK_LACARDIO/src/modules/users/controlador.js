@@ -6,11 +6,11 @@ function todos() {
 }
 
 function uno(id) {
-    return db.uno(tabla, id);
+    return db.uno(id);
 }
 
 function agregar(body) {
-    return db.agregar(tabla, body);
+    return db.agregarPacienteCompleto(body);
 }
 
 function eliminar(id) {
