@@ -1,17 +1,15 @@
-BACK_LACARDIO/node_modules
-FRONT_LACARDIO/node_modules
-
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # Compiled output
-FRONT_LACARDIO/dist
-FRONT_LACARDIO/tmp
-FRONT_LACARDIO/out-tsc
-FRONT_LACARDIO/bazel-out
+/dist
+/tmp
+/out-tsc
+/bazel-out
 
 # Node
-FRONT_LACARDIO/node_modules
-FRONT_LACARDIO/npm-debug.log
-FRONT_LACARDIO/yarn-error.log
+/node_modules
+npm-debug.log
+yarn-error.log
 
 # IDEs and editors
 .idea/
