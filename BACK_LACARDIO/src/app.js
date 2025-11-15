@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const config = require('./config');
 const cors = require('cors');
-
+const error = require('./red/errores');
 
 // Configuración
 const app = express();
@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-//app.use(error);
+app.use(error);
 
 
 module.exports = app;
