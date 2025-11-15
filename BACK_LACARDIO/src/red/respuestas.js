@@ -1,4 +1,4 @@
-exports.success = (req,res,body = '', status = 200,tipomsg='', msg = '', logueado )=>{
+exports.success = (req,res,body = '', status = 200,tipomsg='', msg = '' )=>{
     res.status(status).send({
         error : false,
         status :status,
@@ -8,7 +8,7 @@ exports.success = (req,res,body = '', status = 200,tipomsg='', msg = '', loguead
     })
 }
 
-exports.error = (req,res,body='',status = 500,tipomsg = '',msg = '', logueado)=>{
+exports.error = (req,res,body='',status = 500,tipomsg = '',msg = '')=>{
     res.status(status).send({
         error :true,
         status :status,

@@ -6,7 +6,7 @@ function error(err,req,res,nex){
     const mensaje = err.mensaje || 'Error interno'
     const status = err.status || 500
 
-    respuesta.error(req,res,mensaje,status);
+    respuesta.error(req,res,mensaje,status,'Error interno',err);
 }
 
 module.exports = error;
