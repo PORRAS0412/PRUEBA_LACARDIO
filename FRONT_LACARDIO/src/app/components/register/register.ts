@@ -57,8 +57,8 @@ export class Register {
         ingresos_mensuales: [0, [Validators.required, Validators.min(0)]],
         gastos_mensuales: [0, [Validators.required, Validators.min(0)]],
         deudas: [0, [Validators.required, Validators.min(0)]],
-        capacidad_pago: [{ value: 0, disabled: true }], // calculada automáticamente
-        puntaje_riesgo: [{ value: 0, disabled: true }] // calculado automáticamente
+        capacidad_pago: [0], // calculada automáticamente
+        puntaje_riesgo: [0] // calculado automáticamente
       }),
       complementario: this.fb.group({
         contacto_emergencia: ['', Validators.required],
