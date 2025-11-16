@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "64127876-6849-442a-a2e4-86d20de1aad0",
+		"name": "LACARDIO_DOC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13453405"
+	},
+	"item": [
+		{
+			"name": "Pacientes",
+			"item": [
+				{
+					"name": "Buscar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_api}}/users",
+							"host": [
+								"{{url_api}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar_unico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_api}}/users/31",
+							"host": [
+								"{{url_api}}"
+							],
+							"path": [
+								"users",
+								"31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"paciente\": {\r\n    \"id\": 0,\r\n    \"tipo_documento\": \"CC\",\r\n    \"numero_documento\": \"5551\",\r\n    \"nombres\": \"Juan Carlos\",\r\n    \"apellidos\": \"Pérez Rodríguez\",\r\n    \"fecha_nacimiento\": \"1990-05-10\",\r\n    \"sexo\": \"M\",\r\n    \"correo\": \"juan@correo.com\",\r\n    \"telefono\": \"3001234567\",\r\n    \"direccion\": \"Calle 10 #20-30\"\r\n  },\r\n\r\n  \"financiero\": {\r\n    \"ingresos_mensuales\": 2000000,\r\n    \"gastos_mensuales\": 900000,\r\n    \"deudas\": 300000,\r\n    \"capacidad_pago\": 800000,\r\n    \"puntaje_riesgo\": 2\r\n  },\r\n\r\n  \"complementario\": {\r\n    \"contacto_emergencia\": \"María Pérez\",\r\n    \"telefono_emergencia\": \"3012223344\",\r\n    \"alergias\": \"No conocidas\",\r\n    \"enfermedades\": \"Ninguna\",\r\n    \"observaciones\": \"Paciente sin antecedentes clínicos\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_api}}/users",
+							"host": [
+								"{{url_api}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"id\":3,\r\n   \"tipo_documento\":\"CC\",\r\n   \"numero_documento\":\"6346351853\",\r\n   \"nombres\":\"ANDRES JULIAN\",\r\n   \"apellidos\":\"PORRAS GÓMEZ\",\r\n   \"fecha_nacimiento\":\"2025-04-12T05:00:00.000Z\",\r\n   \"sexo\":\"M\",\r\n   \"correo\":\"ajporras0412@gmail.com\",\r\n   \"telefono\":\"3222863219\",\r\n   \"direccion\":\"dg 46 55 21\",\r\n   \"fecha_registro\":\"2025-11-15T20:53:53.580Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_api}}/users",
+							"host": [
+								"{{url_api}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url_api}}/users/36",
+							"host": [
+								"{{url_api}}"
+							],
+							"path": [
+								"users",
+								"36"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
