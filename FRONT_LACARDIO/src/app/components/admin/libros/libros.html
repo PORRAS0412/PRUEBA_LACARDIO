@@ -1,0 +1,27 @@
+<h2>Libros disponibles :</h2>
+<ul class="libros-lista">
+  <li *ngFor="let libro of libros">
+    <div class="libro-tarjeta" (click)="abrirLibro(libro.url)">
+      <span class="libro-icon">📄</span>
+      <hr>
+      <span class="libro-nombre">{{ libro.nombre }}</span>
+    </div>
+  </li>
+</ul>
+
+<!-- Visor PDF -->
+<div *ngIf="libroSeleccionado" class="visor-container">
+  <div class="visor-controles">
+    <button (click)="cerrarLibro()">Cerrar libro</button>
+    <button (click)="descargarPDF()">Descargar PDF</button>
+    <button (click)="imprimirPDF()">Imprimir PDF</button>
+  </div>
+
+  <pdf-viewer
+    #pdfViewer
+    [src]="libroSeleccionado"
+    [render-text]="true"
+    [show-all]="true"
+    style="display:block; width:100%; height:80vh;">
+  </pdf-viewer>
+</div>

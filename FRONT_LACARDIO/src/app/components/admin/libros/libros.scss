@@ -1,0 +1,104 @@
+/* Lista de libros */
+.libros-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.libros-lista li {
+  flex: 1 1 150px; /* ancho mínimo */
+}
+
+.libro-tarjeta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+}
+
+.libro-tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+.libro-icon {
+  font-size: 3rem; /* ícono grande */
+  color: #e53935; /* color rojo PDF */
+  margin-bottom: 0.5rem;
+}
+
+.libro-nombre {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Contenedor del visor */
+.visor-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px; /* ancho máximo */
+  margin: 1rem auto; /* centrado horizontal */
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.visor-container pdf-viewer {
+  flex: 1;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.visor-container button {
+  align-self: flex-end;
+  margin-bottom: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #ff5252;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.visor-container button:hover {
+  background-color: #e04848;
+  transform: scale(1.05);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .libros-lista {
+    flex-direction: column;
+  }
+
+  .libros-lista li {
+    flex: 1 1 auto;
+  }
+
+  .visor-container {
+    width: 95%; /* casi todo el ancho en móviles */
+    height: 60vh;
+  }
+
+  .visor-container button {
+    align-self: center;
+  }
+}
