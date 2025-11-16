@@ -29,12 +29,58 @@
       text-align: left;
     }
     .footer {
-      background: #e6051f;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      margin-top: 40px;
+  background: #08367b; /* azul institucional */
+  color: white;
+  padding: 40px 20px;
+  margin-top: 40px;
+  font-size: 14px;
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    align-items: start;
+    margin-bottom: 20px;
+  }
+
+  .footer-section h4 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .footer-logo {
+    width: 140px;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin-bottom: 6px;
+
+      a {
+        color: #bbdefb;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
+  }
+
+  .footer-copy {
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 15px;
+    font-size: 13px;
+    opacity: 0.9;
+  }
+}
+
 
 
     .logo-img {
