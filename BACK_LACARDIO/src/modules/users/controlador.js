@@ -1,5 +1,6 @@
 const db = require('./scripts');
 const tabla = 'pacientes';
+const xlsx = require('xlsx');
 
 function todos() {
     return db.todos(tabla);
