@@ -20,10 +20,11 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DB_HOST=postgres
-      - DB_USER=lacardio
-      - DB_PASSWORD=lacardio123
-      - DB_NAME=LACARDIO
+      HOSTLACARDIO: postgres
+      PORTPGLACARDIO: 5432
+      USERPGLACARDIO: lacardio
+      PASSWORDPGLACARDIO: lacardio123
+      DATABASEPGLACARDIO: LACARDIO
     depends_on:
       - postgres
     restart: always

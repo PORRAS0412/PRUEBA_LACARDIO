@@ -9,4 +9,7 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["node", "src/index.js"]
+# Ejecutar siempre desde /app/src
+WORKDIR /app/src
+
+CMD ["node", "index.js"]
