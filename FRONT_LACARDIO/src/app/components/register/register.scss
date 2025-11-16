@@ -1,0 +1,47 @@
+.register-form {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  display: grid;
+  gap: 16px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Encabezados de secciones */
+.register-form h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* Grid para los campos de cada grupo */
+.register-form > div[formGroupName] {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas en desktop */
+  gap: 16px;
+}
+
+/* Campos que deben ocupar toda la fila */
+.register-form mat-form-field.full-width {
+  grid-column: span 2;
+}
+
+/* Botón de submit centrado */
+.register-form button[type="submit"] {
+  justify-self: start;
+  padding: 0.75rem 2rem;
+}
+
+/* Media queries para dispositivos pequeños */
+@media (max-width: 768px) {
+  .register-form > div[formGroupName] {
+    grid-template-columns: 1fr; /* 1 columna en móvil */
+  }
+
+  .register-form button[type="submit"] {
+    justify-self: center;
+    width: 100%;
+  }
+}
