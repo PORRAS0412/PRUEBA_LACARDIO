@@ -13,7 +13,7 @@ RUN npm run build --prod
 FROM nginx:alpine
 
 # Copiar build Angular a NGINX
-COPY --from=build /app/dist/ /usr/share/nginx/html
+COPY --from=build /app/dist/FRONT_LACARDIO/browser /usr/share/nginx/html
 
 # Copiar configuración personalizada (404 fallback, SPA)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
