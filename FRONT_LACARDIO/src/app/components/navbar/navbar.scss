@@ -1,0 +1,101 @@
+/* ================================
+   TOOLBAR – FIJA Y CON Z-INDEX
+================================= */
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 1000;
+  background-color: white !important;
+  border-bottom: 1px solid #eee;
+}
+
+/* Logo */
+.logo-img {
+  height: 40px;
+}
+
+/* Spacer */
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* ================================
+   MENÚ DESKTOP
+================================= */
+.menu-desktop button {
+  font-size: 14px;
+  margin-left: 8px;
+  color: #b8006b;
+}
+
+/* Ocultar en móvil */
+@media (max-width: 768px) {
+  .menu-desktop {
+    display: none !important;
+  }
+  .logo-img {
+    height: 32px;
+  }
+}
+
+/* ================================
+   BOTÓN HAMBURGUESA
+================================= */
+.menu-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .menu-mobile {
+    display: block !important;
+  }
+}
+
+/* ================================
+   SIDENAV MÓVIL (MEJORADO)
+================================= */
+.mobile-menu {
+  width: 260px;
+  padding: 30px 20px;
+  background-color: white !important;
+  position: fixed !important;
+  top: 64px;
+  height: calc(100% - 64px);
+  z-index: 1500;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+}
+
+/* Estilo de las opciones del menú */
+.mobile-menu button {
+  width: 100%;
+  justify-content: flex-start;
+  font-size: 17px;
+  color: #b8006b;
+  padding: 12px 10px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.mobile-menu button:hover {
+  background: #ffe5f3;
+}
+
+/* ================================
+   CONTENIDO PRINCIPAL
+================================= */
+.mat-sidenav-content {
+  margin-top: 64px;
+}
+
+

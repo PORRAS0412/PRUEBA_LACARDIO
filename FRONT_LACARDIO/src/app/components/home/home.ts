@@ -4,11 +4,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { NgFor } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
+    RouterLink,
+    RouterLinkActive,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
