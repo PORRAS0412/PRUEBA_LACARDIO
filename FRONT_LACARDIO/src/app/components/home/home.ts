@@ -10,8 +10,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   selector: 'app-home',
   standalone: true,
   imports: [
-    RouterLink,
-    RouterLinkActive,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
