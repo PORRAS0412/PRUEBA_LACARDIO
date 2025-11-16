@@ -1,33 +1,111 @@
-<mat-stepper headerPosition="bottom" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-      </mat-form-field>
-      <div>
-        <button matButton matStepperNext>Next</button>
+<div class="contenedor">
+  <mat-stepper headerPosition="bottom" #stepper>
+
+    <!-- Paso 1 -->
+    <mat-step [stepControl]="firstFormGroup" optional>
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Descargar archivo de ejemplo</ng-template>
+
+        <div class="step-content">
+          <a
+            href="assets/ejemplo.xlsx"
+            download="archivo_ejemplo.xlsx"
+            mat-flat-button
+            color="primary"
+            class="btn-download"
+          >
+            <mat-icon>download</mat-icon>
+            Descargar archivo de ejemplo
+          </a>
+
+          <button mat-stroked-button matStepperNext color="accent">
+            Siguiente
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Paso 2 -->
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Cargar archivo XLSX</ng-template>
+
+        <div class="file-upload">
+
+          <label for="archivo" class="upload-label">
+            <mat-icon>upload_file</mat-icon>
+            <span>Seleccionar archivo</span>
+          </label>
+
+          <input
+            id="archivo"
+            type="file"
+            (change)="onFileSelected($event)"
+          />
+
+          <div class="archivo-nombre" *ngIf="archivoNombre">
+            <mat-icon>description</mat-icon>
+            {{ archivoNombre }}
+          </div>
+
+        </div>
+
+        <div class="step-actions">
+          <button mat-stroked-button matStepperPrevious>Volver</button>
+          <button mat-flat-button matStepperNext color="primary">Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Paso 3 -->
+    <mat-step>
+      <ng-template matStepLabel>Procesar archivo</ng-template>
+
+      <div class="step-actions">
+        <button mat-stroked-button matStepperPrevious>Volver</button>
+
+        <button mat-flat-button color="primary" (click)="uploadFile()">
+          Procesar archivo
+        </button>
+
+        <button mat-button color="warn" (click)="stepper.reset()">
+          Reiniciar
+        </button>
       </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup" optional>
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Address" formControlName="secondCtrl" required>
-      </mat-form-field>
-      <div>
-        <button matButton matStepperPrevious>Back</button>
-        <button matButton matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button matButton matStepperPrevious>Back</button>
-      <button matButton (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-</mat-stepper>
+    </mat-step>
+
+  </mat-stepper>
+
+  <!-- Tabla de resultados -->
+  <div class="tabla-container" *ngIf="cargaResultados.length">
+    <mat-table [dataSource]="cargaResultados" class="mat-elevation-z8">
+
+      <!-- Fila -->
+      <ng-container matColumnDef="fila">
+        <mat-header-cell *matHeaderCellDef> Fila </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.fila}} </mat-cell>
+      </ng-container>
+
+      <!-- Estado -->
+      <ng-container matColumnDef="ok">
+        <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="estado" [ngClass]="{'exito': element.ok, 'error': !element.ok}">
+            {{ element.ok ? '✔ OK' : '❌ Error' }}
+          </span>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Mensaje -->
+      <ng-container matColumnDef="mensaje">
+        <mat-header-cell *matHeaderCellDef> Mensaje </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.error || ('ID: ' + element.paciente_id) }}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['fila','ok','mensaje']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['fila','ok','mensaje'];"></mat-row>
+    </mat-table>
+  </div>
+</div>

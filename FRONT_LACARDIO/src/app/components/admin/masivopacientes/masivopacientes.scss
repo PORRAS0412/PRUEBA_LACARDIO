@@ -1,0 +1,83 @@
+.contenedor {
+  max-width: 900px;
+  margin: auto;
+  padding: 16px;
+}
+
+.step-content,
+.step-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.btn-download mat-icon {
+  margin-right: 6px;
+}
+
+.file-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.upload-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 2px dashed #3f51b5;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #3f51b5;
+  font-weight: 500;
+}
+
+.upload-label mat-icon {
+  font-size: 28px;
+}
+
+#archivo {
+  display: none;
+}
+
+.archivo-nombre {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.archivo-nombre mat-icon {
+  color: #1976d2;
+}
+
+.tabla-container {
+  margin-top: 32px;
+  overflow-x: auto;
+}
+
+.estado {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.exito {
+  color: green;
+  background: #e9fbe9;
+}
+
+.error {
+  color: red;
+  background: #ffe5e5;
+}
+
+@media (max-width: 600px) {
+  .step-actions button {
+    width: 100%;
+  }
+}

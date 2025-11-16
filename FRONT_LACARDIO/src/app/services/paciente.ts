@@ -25,6 +25,14 @@ export class Paciente {
     return this.http.post(`${this.apiUrl}/`, paciente);
   }
 
+  // Crear un nuevo paciente masivo con archivo
+  crearPacientemasivo(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file); // 'archivo' es el nombre del campo que espera tu API
+    return this.http.post(`${this.apiUrl}/carga-xlsx`, formData);
+  }
+
+
   // Actualizar un paciente existente
   actualizarPaciente(id: number, paciente: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, paciente);
