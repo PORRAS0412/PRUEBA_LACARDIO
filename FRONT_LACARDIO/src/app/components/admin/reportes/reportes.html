@@ -42,13 +42,19 @@
     </mat-card>
   </div>
 
+  <button mat-raised-button color="primary" (click)="descargarExcel()">
+  <mat-icon>download</mat-icon>
+  Descargar reportería
+</button>
+
+
   <!-- =======================
            TABLA
   ========================== -->
   <h2 class="titulo">Lista general de pacientes</h2>
 
   <div class="tabla-wrapper">
-    <table mat-table [dataSource]="filtrados" class="mat-elevation-z8 tabla">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tabla">
 
       <ng-container matColumnDef="nombre">
         <th mat-header-cell *matHeaderCellDef>Paciente</th>
@@ -77,6 +83,14 @@
       <tr mat-header-row *matHeaderRowDef="columnas"></tr>
       <tr mat-row *matRowDef="let row; columns: columnas"></tr>
     </table>
+
+     <div class="paginator-container">
+      <mat-paginator
+        [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 20, 50]"
+        showFirstLastButtons>
+      </mat-paginator>
+  </div>
   </div>
 
   <!-- =======================
@@ -103,8 +117,15 @@
         GRAFICAS
   ========================== -->
 
+
   <h2 class="titulo">Gráficos de análisis</h2>
 
+
+
+  <button mat-raised-button color="primary" (click)="cargarPacientes()">
+    <mat-icon>refresh</mat-icon>
+    Refrescar Gráficos
+  </button>
   <div class="charts-grid">
     <div class="chart-box">
       <h3>Distribución de riesgo</h3>

@@ -1,20 +1,26 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { Paciente } from '../../../services/paciente';
 import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+
+
 
 @Component({
   selector: 'app-reportes',
   standalone: true,
   imports: [
    CommonModule,
+    MatPaginatorModule,
     FormsModule,
     MatCardModule,
     MatFormFieldModule,
@@ -26,7 +32,7 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './reportes.html',
   styleUrl: './reportes.scss',
 })
-export class Reportes implements OnInit{
+export class Reportes implements OnInit, AfterViewInit {
   pacientes: any[] = [];
   filtrados: any[] = [];
 
@@ -47,23 +53,37 @@ export class Reportes implements OnInit{
   chartIngresos: any;
   chartRegistro: any;
 
+  dataSource = new MatTableDataSource<any>();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(private pacienteSrv: Paciente) {}
 
   ngOnInit() {
     this.cargarPacientes();
   }
 
+  ngAfterViewInit() {
+  this.dataSource.paginator = this.paginator;
+  }
+
   // =====================================
   // CARGA PRINCIPAL
   // =====================================
-  cargarPacientes() {
-    this.pacienteSrv.getPacientes().subscribe((res: any) => {
-      this.pacientes = res.body || res;
-      this.filtrados = [...this.pacientes];
+cargarPacientes() {
+  this.pacienteSrv.getPacientes().subscribe((res: any) => {
+    this.pacientes = res.body || res;
+    this.filtrados = [...this.pacientes];
 
+    this.dataSource.data = this.filtrados;
+
+    // Esperar a que Angular pinte la vista antes de dibujar gráficas
+    setTimeout(() => {
       this.calcularReportes();
-    });
-  }
+    }, 0);
+  });
+}
+
+
 
   // =====================================
   // CALCULO GENERAL
@@ -107,15 +127,19 @@ export class Reportes implements OnInit{
   // =====================================
   // BUSCADOR
   // =====================================
-  buscar() {
-    const txt = this.busqueda.toLowerCase();
+ buscar() {
+  const txt = this.busqueda.toLowerCase();
 
-    this.filtrados = this.pacientes.filter(p =>
-      p.nombres?.toLowerCase().includes(txt) ||
-      p.apellidos?.toLowerCase().includes(txt) ||
-      p.numero_documento?.toLowerCase().includes(txt)
-    );
-  }
+  this.filtrados = this.pacientes.filter(p =>
+    p.nombres?.toLowerCase().includes(txt) ||
+    p.apellidos?.toLowerCase().includes(txt) ||
+    p.numero_documento?.toLowerCase().includes(txt)
+  );
+
+
+  this.dataSource.data = this.filtrados;
+}
+
 
   // =====================================
   // GRAFICAS
@@ -192,6 +216,41 @@ export class Reportes implements OnInit{
       }
     });
   }
+
+  descargarExcel() {
+  const data = this.filtrados.map(p => ({
+    TipoDocumento: p.tipo_documento,
+    Documento: p.numero_documento,
+    NombreCompleto: `${p.nombres} ${p.apellidos}`,
+    FechaNacimiento: p.fecha_nacimiento,
+    Sexo: p.sexo,
+    Correo: p.correo,
+    Telefono: p.telefono,
+    Direccion: p.direccion,
+    Ingresos: p.ingresos_mensuales,
+    Gastos: p.gastos_mensuales,
+    Deudas: p.deudas,
+    CapacidadPago: p.capacidad_pago,
+    PuntajeRiesgo: p.puntaje_riesgo,
+    ContactoEmergencia: p.contacto_emergencia,
+    TelefonoEmergencia: p.telefono_emergencia,
+    Alergias: p.alergias,
+    Enfermedades: p.enfermedades,
+    Observaciones: p.observaciones,
+  }));
+
+  const hoja = XLSX.utils.json_to_sheet(data);
+  const libro = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(libro, hoja, 'Reporteria');
+
+  const excelBuffer = XLSX.write(libro, { bookType: 'xlsx', type: 'array' });
+
+  const blob = new Blob([excelBuffer], {
+    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  });
+
+  saveAs(blob, 'reporteria_pacientes.xlsx');
+}
 
   graficaRegistros() {
     if (this.chartRegistro) this.chartRegistro.destroy();
