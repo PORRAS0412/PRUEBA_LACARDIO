@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  front:
+    build:
+      context: ./FRONT_LACARDIO
+      dockerfile: Dockerfile
+    container_name: front_lacardio
+    ports:
+      - "80:80"
+    depends_on:
+      - back
+    restart: always
+
+  back:
+    build:
+      context: ./BACK_LACARDIO
+      dockerfile: Dockerfile
+    container_name: back_lacardio
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=postgres
+      - DB_USER=lacardio
+      - DB_PASSWORD=lacardio123
+      - DB_NAME=LACARDIO
+    depends_on:
+      - postgres
+    restart: always
+
+  postgres:
+    image: postgres:16
+    container_name: postgres_lacardio
+    environment:
+      POSTGRES_USER: lacardio
+      POSTGRES_PASSWORD: lacardio123
+      POSTGRES_DB: LACARDIO
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  postgres_data:
