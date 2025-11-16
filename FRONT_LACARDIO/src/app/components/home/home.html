@@ -1,0 +1,40 @@
+<mat-toolbar color="primary" class="toolbar">
+  <img
+    src="img/cardio.png"
+    alt="Logo La Cardio"
+    class="logo-img"
+  />
+
+  <span class="spacer"></span>
+
+  <button mat-button>Inicio</button>
+  <button mat-button>Servicios</button>
+  <button mat-button>Contacto</button>
+</mat-toolbar>
+
+
+<div class="banner">
+  <h1>Cuidamos tu salud</h1>
+  <p>Atención 24/7 con los mejores especialistas</p>
+  <button mat-raised-button color="accent">Agendar Cita</button>
+</div>
+
+<div class="servicios-section">
+  <h2>Servicios Principales</h2>
+
+  <div class="cards">
+    <mat-card *ngFor="let s of servicios">
+      <mat-card-header>
+        <mat-icon>{{ s.icon }}</mat-icon>
+        <mat-card-title>{{ s.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        {{ s.desc }}
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<footer class="footer">
+  © 2025 Clínica San José - Todos los derechos reservados
+</footer>
