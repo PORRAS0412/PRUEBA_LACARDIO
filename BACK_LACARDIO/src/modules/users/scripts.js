@@ -6,7 +6,7 @@ const db = require('../../db/postgres');
 function todos(tabla) {
   return new Promise((res, rej) => {
     db.conexionpgnexo.query(
-      `SELECT * FROM ${tabla} ORDER BY 1 DESC`,
+      `SELECT p.*, pf.*, pc.* FROM pacientes p LEFT JOIN pacientes_financieros pf ON pf.paciente_id = p.id LEFT JOIN pacientes_complementarios pc ON pc.paciente_id = p.id`,
       (error, resultado) => {
         if (error) return rej(error);
         res(resultado.rows);

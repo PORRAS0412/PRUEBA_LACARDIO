@@ -1,1 +1,135 @@
-<p>reportes works!</p>
+<div class="reportes-container">
+
+  <!-- =======================
+       BUSCADOR Y ACCIONES
+  ========================== -->
+<div class="header-actions">
+  <mat-form-field appearance="outline" class="input-full">
+    <mat-label>Buscar pacientes</mat-label>
+    <input matInput [(ngModel)]="busqueda" (keyup)="buscar()">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="cargarPacientes()">
+    <mat-icon>refresh</mat-icon>
+    Actualizar
+  </button>
+
+  <span class="resultados">({{ filtrados.length }} resultados)</span>
+</div>
+
+  <!-- =======================
+        CARDS DE MÉTRICAS
+  ========================== -->
+  <div class="metric-cards">
+    <mat-card class="metric">
+      <h3>Total Pacientes</h3>
+      <p class="valor">{{ pacientes.length }}</p>
+    </mat-card>
+
+    <mat-card class="metric">
+      <h3>Promedio Ingresos</h3>
+      <p class="valor">{{ promedioIngresos | number }}</p>
+    </mat-card>
+
+    <mat-card class="metric">
+      <h3>Promedio Riesgo</h3>
+      <p class="valor">{{ promedioRiesgo | number:'1.0-2' }}</p>
+    </mat-card>
+
+    <mat-card class="metric">
+      <h3>Promedio Edad</h3>
+      <p class="valor">{{ promedioEdad }} años</p>
+    </mat-card>
+  </div>
+
+  <!-- =======================
+           TABLA
+  ========================== -->
+  <h2 class="titulo">Lista general de pacientes</h2>
+
+  <div class="tabla-wrapper">
+    <table mat-table [dataSource]="filtrados" class="mat-elevation-z8 tabla">
+
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Paciente</th>
+        <td mat-cell *matCellDef="let p">
+          <b>{{p.nombres}} {{p.apellidos}}</b>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="doc">
+        <th mat-header-cell *matHeaderCellDef>Documento</th>
+        <td mat-cell *matCellDef="let p">{{p.numero_documento}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="cap">
+        <th mat-header-cell *matHeaderCellDef>Capacidad</th>
+        <td mat-cell *matCellDef="let p">
+          ${{p.capacidad_pago | number}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="riesgo">
+        <th mat-header-cell *matHeaderCellDef>Riesgo</th>
+        <td mat-cell *matCellDef="let p">{{p.puntaje_riesgo}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+    </table>
+  </div>
+
+  <!-- =======================
+        TOPS
+  ========================== -->
+
+  <h2 class="titulo">Top 10 Capacidad de pago</h2>
+  <div class="cards">
+    <mat-card *ngFor="let t of topCapacidad" class="card">
+      <b>{{t.nombres}} {{t.apellidos}}</b>
+      <p>Capacidad: <strong>${{t.capacidad_pago | number}}</strong></p>
+    </mat-card>
+  </div>
+
+  <h2 class="titulo">Top 10 Deudas</h2>
+  <div class="cards">
+    <mat-card *ngFor="let t of topDeudas" class="card">
+      <b>{{t.nombres}} {{t.apellidos}}</b>
+      <p>Deuda: <strong>${{t.deudas | number}}</strong></p>
+    </mat-card>
+  </div>
+
+  <!-- =======================
+        GRAFICAS
+  ========================== -->
+
+  <h2 class="titulo">Gráficos de análisis</h2>
+
+  <div class="charts-grid">
+    <div class="chart-box">
+      <h3>Distribución de riesgo</h3>
+      <canvas id="riesgoChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <h3>Pacientes por sexo</h3>
+      <canvas id="sexoChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <h3>Edades de pacientes</h3>
+      <canvas id="edadChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <h3>Ingresos vs Gastos</h3>
+      <canvas id="ingresosChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <h3>Pacientes registrados por mes</h3>
+      <canvas id="registroChart"></canvas>
+    </div>
+  </div>
+
+</div>
