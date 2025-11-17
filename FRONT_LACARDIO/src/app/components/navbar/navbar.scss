@@ -2,7 +2,7 @@
    TOOLBAR – FIJA Y CON Z-INDEX
 ================================= */
 .toolbar {
-  position: fixed;
+  position: fixed !important;
   top: 0;
   left: 0;
   right: 0;
@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   padding: 0 16px;
-  z-index: 1000;
+  z-index: 99999 !important;
   background-color: white !important;
   border-bottom: 1px solid #eee;
 }
@@ -45,7 +45,7 @@
 }
 
 /* ================================
-   BOTÓN HAMBURGUESA
+   BOTÓN HAMBURGUESA MÓVIL
 ================================= */
 .menu-mobile {
   display: none;
@@ -54,29 +54,27 @@
 @media (max-width: 768px) {
   .menu-mobile {
     display: block !important;
+    color: #b8006b;
   }
 }
 
 /* ================================
-   SIDENAV MÓVIL (MEJORADO)
+   SIDENAV MÓVIL
 ================================= */
 .mobile-menu {
-  width: 260px;
-  padding: 30px 20px;
+  width: 100%;
+  padding: 5px 20px;
   background-color: white !important;
-  position: fixed !important;
+  position: relative !important;
   top: 64px;
   height: calc(100% - 64px);
-  z-index: 1500;
-
+  //z-index: 100000 !important; /* Más alto que contenido y tabs */
   display: flex;
-  flex-direction: column;
+  flex-direction:row;
   gap: 20px;
-
   box-shadow: 2px 0 10px rgba(0,0,0,0.15);
 }
 
-/* Estilo de las opciones del menú */
 .mobile-menu button {
   width: 100%;
   justify-content: flex-start;
@@ -95,7 +93,20 @@
    CONTENIDO PRINCIPAL
 ================================= */
 .mat-sidenav-content {
-  margin-top: 64px;
+  margin-top: 64px !important; /* espacio para toolbar */
+  position: relative !important;
+  z-index: 1 !important;
 }
 
-
+/* ================================
+   TABS – Que no sobrepongan al toolbar
+================================= */
+.mat-tab-group,
+.mat-tab-body-wrapper,
+.mat-tab-body {
+  position: relative !important;
+  z-index: 1 !important; /* debajo del toolbar y sidenav */
+}
+.mat-tab-header {
+  margin-top: 64px !important; /* espacio para toolbar */
+}
